@@ -1,0 +1,277 @@
+*, *::after,*::before{
+  box-sizing: border-box;
+  
+}
+.App{
+  margin:0;
+}
+nav{
+  background-color: #222;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+ nav h3{
+  margin: 0;
+  color: white;
+}
+ul{
+  margin: 0;
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+a{
+  color: white;
+  text-decoration: none;
+}
+a:hover,.logout:hover{
+  cursor:pointer;
+  text-decoration: underline;
+}
+.inputWrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.inputs{
+  width:25%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(128, 127, 127);
+  border-radius: 4px;
+  padding: 2rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;;
+}
+.inputWrapper input, button {
+  margin-bottom: 1rem;
+}
+ input{
+  height: 2rem;
+  
+}
+.inputWrapper input:first-of-type{
+  margin-top: 1rem;
+}
+.inputWrapper  button {
+  width: 75%;
+    background-color: #222;
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: auto;
+    max-width: none;
+    min-height: 44px;
+    min-width: 10px;
+    outline: none;
+    overflow: hidden;
+    padding: 9px 20px 8px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 75%;
+  }
+  
+  .inputWrapper  button:hover,
+  .inputWrapper  button:focus {
+    opacity: .75;
+  }
+
+.usersWrapper {
+  display: flex;
+  gap:1rem;
+  margin: 1rem 2rem 1rem 2rem;
+  flex-wrap: wrap;
+  
+}
+.userWrap{
+  width: calc((100%/4 ) - 1rem);
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 4px;
+  padding: 1rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;;
+}
+.userWrap:hover {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  position: relative;
+  top: 1px;
+  left: 1px
+}
+
+.userWrap > img {
+ width: 200px;
+}
+
+h5{
+  margin: 0;
+}
+
+.singleWrapper{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 2rem 1rem 2rem;
+}
+.topWrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-start;
+  align-items: center;
+  
+}
+.smallWrap {
+  height: 200px;
+  width: 50%;
+  min-width: 300px;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+.smallWrap>div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(100%/2 - 1rem);
+  max-height: 150px;
+}
+.reviewInput{
+  display: flex;
+  flex-direction: column;
+}
+.reviewInput h2{
+  margin: 0;
+}
+textarea{
+  margin: 1rem auto 1rem auto;
+}
+
+.submit{
+  width: 75%;
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0 auto 0 auto;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 75%;
+}
+
+.reviewsWrapper{
+  background-color: rgb(244 244 245);
+  margin-left: 8.5%;
+  padding: 1rem;
+  border-radius: 4px;
+}
+.reviewsWrapper h3{
+  margin:0.5rem 0 0.5rem 0;
+}
+.review{
+  border-bottom: 1px solid rgb(216, 216, 216);
+}
+.review:last-of-type{
+  border-bottom: none;
+}
+
+.chatbox{
+  width: 300px;
+}
+input[type=color]{
+  width: 100%;
+  margin:1rem auto 1rem auto;
+}
+
+.chatarea{
+  display: flex;
+  flex-direction: column-reverse;
+  height: 300px;
+  background-color: rgba(34, 34, 34, 0.34);
+  padding: 1rem;
+  overflow-y: scroll;
+}
+.chatarea::-webkit-scrollbar {
+  width: 10px;
+}
+.chatarea::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+
+.chatarea::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+.chatarea::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.sendMsg > textarea{
+  width:100%;
+  margin-bottom:0;
+}
+  
+.sendBttn {
+  width: 25%;
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: auto;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.sendBttn:hover,
+.sendBttn:focus {
+  opacity: .80;
+}
+.sendBttn:disabled {
+  opacity: .40;
+}
+

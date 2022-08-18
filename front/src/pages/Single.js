@@ -31,7 +31,6 @@ const Single = ({ currentUser, socket }) => {
     fetch("http://localhost:4001/userItems", options)
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
         setUser(data.user);
         setUserItems(data.message);
       });

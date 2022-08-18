@@ -15,20 +15,18 @@ const socket = io.connect("http://localhost:4001");
 function App() {
   const [currentUser, setCurrentUser] = useState("");
   const [logCounter, setCounter] = useState(0);
-  const [notif, setNotif] = useState(0)
   const [respMessage, setRespMessage] = useState("")
   const [requestss, setRequests] = useState([])
 
   useEffect(() => {
     update();
     socket.on("rqsResponse", message => {
-      console.log(message)
       setRespMessage(message)
       setTimeout(() => {
         setRespMessage("")
       }, 5000);
     })
-  }, []);
+  }, [socket]);
 
   function logout() {
     const user = {
@@ -45,7 +43,6 @@ function App() {
     fetch("http://localhost:4001/logout", options)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         update();
         socket.disconnect()
       });
@@ -62,12 +59,12 @@ function App() {
     fetch("http://localhost:4001/loggedin", options)
       .then((res) => res.json())
       .then((data) => {
+        // console.log(data);
         setCurrentUser(data.message);
-        console.log(data.message)
+        // console.log(currentUser);
         if (!data.message) return
         const user = data.message
         socket.emit("addUser", user)
-      
       });
   }
   return (

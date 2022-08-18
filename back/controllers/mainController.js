@@ -3,7 +3,6 @@ const itemScheme = require("../models/itemScheme")
 const bcrypt = require("bcrypt")
 module.exports = {
     register: async (req, res) => {
-        console.log(req.body)
         const {email, passOne} = req.body
         const user = new userScheme()
         user.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/User_font_awesome.svg/2048px-User_font_awesome.svg.png"
@@ -17,7 +16,6 @@ module.exports = {
         res.send({ok: "ok"})
     },
     upload: async (req, res) => {
-        console.log(req.body)
         const {img, title} = req.body
         if (!img) return res.send({success: false, message:"Image URL missing"})
         if (!title) return res.send({success: false, message:"Title missing"})
@@ -62,7 +60,6 @@ module.exports = {
     singleUserItems: async (req, res) => {
         const user = await userScheme.findOne({_id: req.body.id})
         const userItems = await itemScheme.find({owner: req.body.id})
-        console.log(user)
         res.send({message: userItems, user: user})
     },
     

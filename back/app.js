@@ -22,13 +22,11 @@ http.listen(4001)
 app.set("socketio", io)
 let requests = []
 let users = []
-let userRequests = []
 io.on("connect", (socket) => {
     socket.emit("myRequests", requests);
 
     socket.on ('disconnect', () => {
         users = users.filter(x => x.id !== socket.id)
-       console.log(users); 
     }) 
     socket.on ('addUser', (name) => {
         const thisUser = {
@@ -36,7 +34,6 @@ io.on("connect", (socket) => {
             name: name
         }
         users.push(thisUser)
-        console.log(users);
     })
 
     socket.on('sendCart', (request) => {
@@ -48,11 +45,9 @@ io.on("connect", (socket) => {
     })
 
     socket.on('notify', (currentUser) => {
-        // userRequests = requests.filter(x => x.owner === currentUser)
         socket.emit("myRequests", requests);
     })
     socket.on("acceptRequest", async (rqst) => {
-        // console.log(rqst)
         const newOwner = await userScheme.findOne({username:rqst.requestor})
         rqst.items.map(async (x) => {
             try{
@@ -64,16 +59,15 @@ io.on("connect", (socket) => {
         })
         io.emit("updt")
         const recievingSocketId = users.find(x => x.name === rqst.requestor)
-        // console.log(recievingSocketId)
+        if (!recievingSocketId) return
         const message = "Your request has been accepted"
-        // socket.emit("rqsResponse", message)
         io.to(recievingSocketId.id).emit('rqsResponse', message)
     })
     socket.on("declineRequest", (rqst) => {
         requests = requests.filter(y => y.id !== rqst.id)
         const message = "Your request has been declined"
-        // socket.emit("rqsResponse", message)
         const recievingSocketId = users.find(x => x.name === rqst.requestor)
+        if (!recievingSocketId) return
         io.to(recievingSocketId.id).emit('rqsResponse', message)
     })
    

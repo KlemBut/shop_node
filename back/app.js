@@ -62,12 +62,13 @@ io.on("connect", (socket) => {
                 console.log("fail")
             }
         })
+        io.emit("updt")
 
     })
-    // socket.on("removeReq", (i) => {
-    //     console.log(i)
-    // })
-
+    socket.on("declineRequest", (rqst) => {
+        requests = requests.filter(y => y.id !== rqst.id)
+    })
+   
 })
 
 

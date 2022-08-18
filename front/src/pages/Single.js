@@ -8,9 +8,14 @@ const Single = ({ currentUser, socket }) => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
+    socket.on("updt", () => {
+      setData()
+    })
     setData();
+    
   }, []);
   function setData() {
+    
     const user = {
       id: id,
     };
@@ -54,6 +59,13 @@ const Single = ({ currentUser, socket }) => {
     }
     
     socket.emit('sendCart', request)
+    const err = {
+      title: "Request sent",
+    };
+    setCart([err])
+    setTimeout(() => {
+  setCart([]);
+}, "5000")
   }
   return (
     <div className="singleWrapper">

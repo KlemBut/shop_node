@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const Notifications = ({socket, currentUser, notif, setNotif}) => {
-    const [requestss, setRequests] = useState()
+    const [requestss, setRequests] = useState([])
     checkNotif()
     useEffect(() => {
         socket.on("myRequests", (requests) => {
@@ -22,19 +22,21 @@ const Notifications = ({socket, currentUser, notif, setNotif}) => {
     }
     function accept (rqst) {
         socket.emit("acceptRequest", rqst)
-        
+    }
+    function decline (rqst) {
+        socket.emit("declineRequest", rqst)
     }
 
     return (
-       requestss? requestss.map((x, i ) => {
+       requestss.length > 0? requestss.map((x, i ) => {
         return <div key={i}>
         <h3>Request by: {x.requestor}</h3>
         {x.items.map((y, india) => <div key={india}>
             <img src={y.img} alt="" style={{width:"100px"}} />
             <h5>{y.title}</h5>
         </div>)}
-        <button onClick={() => accept(x, i)}>Accept</button>
-        <button>Decline</button>
+        <button onClick={() => accept(x)}>Accept</button>
+        <button onClick={() => decline(x)}>Decline</button>
         </div>
     })
          : <h2>No requests yet</h2>

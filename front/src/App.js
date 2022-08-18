@@ -19,12 +19,7 @@ function App() {
 
   useEffect(() => {
     update();
-    // socket.on("myRequests", (requests) => {
-    // console.log(requests);
-    // const currentRequests = requests.filter(x => x.owner === currentUser)
-    // setNotif(currentRequests.length)
-    // console.log(requestss);
-// })
+    
   }, []);
 
   function logout() {
@@ -56,14 +51,15 @@ function App() {
       },
       credentials: "include",
     };
-    let response = await fetch("http://localhost:4001/loggedin", options)
+    fetch("http://localhost:4001/loggedin", options)
       .then((res) => res.json())
       .then((data) => {
         setCurrentUser(data.message);
-        if (data.message !== null){
+        console.log(data.message)
+        if (!data.message) return
         const user = data.message
         socket.emit("addUser", user)
-        ;}
+      
       });
   }
   return (

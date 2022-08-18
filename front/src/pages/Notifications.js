@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 
-const Notifications = ({socket, currentUser, notif, setNotif}) => {
-    const [requestss, setRequests] = useState([])
-    checkNotif()
+const Notifications = ({socket, currentUser, notif, setNotif, requestss, setRequests}) => {
+    // const [requestss, setRequests] = useState([])
     useEffect(() => {
+        checkNotif()
         socket.on("myRequests", (requests) => {
             const currentRequests = requests.filter(x => x.owner === currentUser)
             setRequests(currentRequests);
-            setNotif(currentRequests.length)
-            
+      
         })
        
     }, [])
@@ -22,9 +21,13 @@ const Notifications = ({socket, currentUser, notif, setNotif}) => {
     }
     function accept (rqst) {
         socket.emit("acceptRequest", rqst)
+        setTimeout(() => {
+            checkNotif()
+          }, "2000")
     }
     function decline (rqst) {
         socket.emit("declineRequest", rqst)
+        checkNotif()
     }
 
     return (

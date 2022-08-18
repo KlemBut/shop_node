@@ -6,6 +6,7 @@ const Single = ({ currentUser, socket }) => {
   const [userItems, setUserItems] = useState([]);
   const [user, setUser] = useState([]);
   const [cart, setCart] = useState([]);
+  const [message, setMessage] = useState("Select an item to send request")
 
   useEffect(() => {
     socket.on("updt", () => {
@@ -38,10 +39,8 @@ const Single = ({ currentUser, socket }) => {
 
   function addToCart(item) {
     if (currentUser === user.username) {
-      const err = {
-        title: "You can't request your own items",
-      };
-      return setCart([err]);
+      setMessage("You can't request your own items")
+      return ;
     }
     const itemInCart = cart.some((x) => x._id === item._id);
     if (!itemInCart) {
@@ -59,13 +58,8 @@ const Single = ({ currentUser, socket }) => {
     }
     
     socket.emit('sendCart', request)
-    const err = {
-      title: "Request sent",
-    };
-    setCart([err])
-    setTimeout(() => {
-  setCart([]);
-}, "5000")
+    setMessage("Request sent")
+    setCart([])
   }
   return (
     <div className="singleWrapper">
@@ -90,7 +84,7 @@ const Single = ({ currentUser, socket }) => {
               })
             ) : (
               <div>
-                <h4>Select an item to send request</h4>
+                <h4>{message}</h4>
               </div>
             )}
           </div>

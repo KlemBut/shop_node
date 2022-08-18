@@ -16,10 +16,18 @@ function App() {
   const [currentUser, setCurrentUser] = useState("");
   const [logCounter, setCounter] = useState(0);
   const [notif, setNotif] = useState(0)
+  const [respMessage, setRespMessage] = useState("")
+  const [requestss, setRequests] = useState([])
 
   useEffect(() => {
     update();
-    
+    socket.on("rqsResponse", message => {
+      console.log(message)
+      setRespMessage(message)
+      setTimeout(() => {
+        setRespMessage("")
+      }, 5000);
+    })
   }, []);
 
   function logout() {
@@ -73,7 +81,9 @@ function App() {
                 <li><Link to="/"><h3 className="logout" onClick={logout}>Logout</h3></Link></li>
                 <li><Link to="/main"><h3>Main</h3></Link></li>
                 <li><Link to="/upload"><h3>Upload</h3></Link></li>
-                <li><Link to="/notify"><h3>Notifications ({notif})</h3></Link></li>
+                <li><Link to="/notify"><h3>Notifications ({requestss.length})</h3></Link></li>
+                {respMessage.length > 0? <li><h3>{respMessage}</h3></li> : null}
+
               </ul>
             </div>
           ) : (
@@ -104,7 +114,7 @@ function App() {
             element={<Single currentUser={currentUser} socket={socket}></Single>}
           ></Route>
           <Route path="/upload" element={<Upload></Upload>}></Route>
-          <Route path="/notify" element={<Notifications socket={socket} currentUser={currentUser} notif={notif}  setNotif={setNotif}></Notifications>}></Route>
+          <Route path="/notify" element={<Notifications socket={socket} currentUser={currentUser} requestss={requestss}  setRequests={setRequests}></Notifications>}></Route>
 
         </Routes>
       </div>

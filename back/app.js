@@ -63,10 +63,18 @@ io.on("connect", (socket) => {
             }
         })
         io.emit("updt")
-
+        const recievingSocketId = users.find(x => x.name === rqst.requestor)
+        // console.log(recievingSocketId)
+        const message = "Your request has been accepted"
+        // socket.emit("rqsResponse", message)
+        io.to(recievingSocketId.id).emit('rqsResponse', message)
     })
     socket.on("declineRequest", (rqst) => {
         requests = requests.filter(y => y.id !== rqst.id)
+        const message = "Your request has been declined"
+        // socket.emit("rqsResponse", message)
+        const recievingSocketId = users.find(x => x.name === rqst.requestor)
+        io.to(recievingSocketId.id).emit('rqsResponse', message)
     })
    
 })

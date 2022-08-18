@@ -23,7 +23,6 @@ const Login = ({update, socket}) => {
       fetch('http://localhost:4001/login', options)
       .then(r => r.json())
       .then(data => {
-        console.log(data)
         setErrMsg(data.message)
         update()
         if (data.success){
@@ -36,7 +35,7 @@ const Login = ({update, socket}) => {
         <div className='inputWrapper'>
             <div className='inputs'>
                 <input type="text" placeholder="username" ref={username} />
-                <input type="text" placeholder="password" ref={pass}/>
+                <input type="password" placeholder="password" ref={pass}/>
                 <p>{errMssg}</p>
                 <button onClick={logUser}>Login</button>
             </div>

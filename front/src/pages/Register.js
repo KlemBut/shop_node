@@ -24,7 +24,6 @@ const Register = () => {
       fetch('http://localhost:4001/register', options)
       .then(r => r.json())
       .then(data => {
-        console.log(data)
         setErrMsg(data.message)
         if (data.message === "success"){
         username.current.value = ""
@@ -38,8 +37,8 @@ const Register = () => {
         <div className='inputWrapper'>
             <div className='inputs'>
                 <input type="text" placeholder="username" ref={username} />
-                <input type="text" placeholder="password" ref={pass}/>
-                <input type="text" placeholder="password repeat" ref={pass2}/>
+                <input type="password" placeholder="password" ref={pass}/>
+                <input type="password" placeholder="password repeat" ref={pass2}/>
                 <p>{errMssg}</p>
                 <button onClick={regUser}>Register</button>
             </div>
